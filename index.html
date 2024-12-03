@@ -19,6 +19,7 @@
         td {
             border: 1px solid #ddd;
             padding: 10px;
+            white-space: nowrap;
         }
 
         th {
@@ -30,111 +31,174 @@
             font-weight: bold;
             background-color: #e6e6e6;
         }
-
-        .onion {
-            color: purple;
-        }
-
-        /* 洋葱颜色 */
-        .melon {
-            color: green;
-        }
-
-        /* 香冬瓜颜色 */
-        .tomato {
-            color: red;
-        }
-
-        /* 番茄颜色 */
-        .west-melon {
-            color: darkgreen;
-        }
-
-        /* 西葫芦颜色 */
-        .potato {
-            color: brown;
-        }
-
-        /* 土豆颜色 */
-        .water {
-            color: lightblue;
-        }
-
-        /* 水的颜色 */
-        .pumpkin {
-            color: orange;
-        }
-
-        /* 南瓜颜色 */
     </style>
 </head>
 
 <body>
 
-    <table>
+    <table id="shoppingTable">
         <tr>
             <th class="date">24-01-21</th>
             <td class="total">¥29.24</td>
-            <td class="water">手擀面</td>
+            <td>手擀面</td>
             <td>¥2.51</td>
-            <td class="potato">鸡胸肉</td>
+            <td>鸡胸肉</td>
             <td>¥3.74</td>
-            <td class="onion">杏鲍菇</td>
+            <td>杏鲍菇</td>
             <td>¥2.54</td>
-            <td class="pumpkin">鸡翅中</td>
+            <td>鸡翅中</td>
             <td>¥11.91</td>
-            <td class="west-melon">大葱</td>
+            <td>大葱</td>
             <td>¥1.97</td>
-            <td class="potato">五香干</td>
+            <td>五香干</td>
             <td>¥2.33</td>
-            <td class="onion">大蒜</td>
+            <td>大蒜</td>
             <td>¥4.24</td>
         </tr>
         <tr>
             <th class="date">24-01-24</th>
             <td class="total">¥49.10</td>
-            <td class="water">宽面</td>
+            <td>宽面</td>
             <td>¥3.13</td>
-            <td class="onion">老干妈</td>
+            <td>老干妈</td>
             <td>¥11.97</td>
-            <td class="potato">白象</td>
+            <td>白象</td>
             <td>¥11.97</td>
-            <td class="water">挂面</td>
+            <td>挂面</td>
             <td>¥7.15</td>
-            <td class="onion">鸡蛋</td>
+            <td>鸡蛋</td>
             <td>¥14.88</td>
-            <td class="west-melon">小葱</td>
+            <td>小葱</td>
             <td>¥0.00</td>
         </tr>
         <tr>
             <th class="date">24-01-28</th>
             <td class="total">¥75.83</td>
-            <td class="onion">皱皮椒</td>
+            <td>皱皮椒</td>
             <td>¥2.64</td>
-            <td class="onion">撒尿丸</td>
+            <td>撒尿丸</td>
             <td>¥17.49</td>
-            <td class="west-melon">大白菜</td>
+            <td>大白菜</td>
             <td>¥2.64</td>
-            <td class="onion">大葱</td>
+            <td>大葱</td>
             <td>¥2.46</td>
-            <td class="potato">土豆</td>
+            <td>土豆</td>
             <td>¥3.25</td>
         </tr>
         <tr>
             <th class="date">24-02-04</th>
             <td class="total">¥55.80</td>
-            <td class="water">呷哺蘸料</td>
+            <td>呷哺蘸料</td>
             <td>¥3.70</td>
-            <td class="onion">土鸡蛋</td>
+            <td>土鸡蛋</td>
             <td>¥0.00</td>
-            <td class="onion">叮咚牛肉酱</td>
+            <td>叮咚牛肉酱</td>
             <td>¥3.20</td>
-            <td class="water">海底捞蘸料</td>
+            <td>海底捞蘸料</td>
             <td>¥3.70</td>
-            <td class="potato">冷冻肥牛卷</td>
+            <td>冷冻肥牛卷</td>
             <td>¥27.15</td>
         </tr>
+        <tr>
+            <th class="date">24-02-06</th>
+            <td class="total">¥39.49</td>
+            <td>西兰花</td>
+            <td>¥5.19</td>
+            <td>番茄</td>
+            <td>¥6.29</td>
+            <td>土鸡蛋</td>
+            <td>¥0.00</td>
+            <td>香糟凤爪</td>
+            <td>¥11.94</td>
+            <td>虎皮凤爪</td>
+            <td>¥11.88</td>
+            <td>螺丝椒</td>
+            <td>¥4.19</td>
+        </tr>
+        <tr>
+            <th class="date">24-02-09</th>
+            <td class="total">¥148.85</td>
+            <td>芝麻汤圆</td>
+            <td>¥11.61</td>
+            <td>三全水饺</td>
+            <td>¥7.66</td>
+            <td>黑芝麻汤圆</td>
+            <td>¥6.67</td>
+            <td>旺仔</td>
+            <td>¥9.89</td>
+            <td>AD钙</td>
+            <td>¥8.50</td>
+            <td>三鲜水饺</td>
+            <td>¥14.33</td>
+            <td>牛腩</td>
+            <td>¥27.13</td>
+            <td>皱皮椒</td>
+            <td>¥2.71</td>
+            <td>新土豆</td>
+            <td>¥4.16</td>
+            <td>番茄</td>
+            <td>¥5.61</td>
+            <td>火龙果</td>
+            <td>¥13.52</td>
+            <td>香干</td>
+            <td>¥4.80</td>
+            <td>中百页</td>
+            <td>¥4.99</td>
+            <td>花菜</td>
+            <td>¥3.53</td>
+            <td>鸭腿</td>
+            <td>¥9.89</td>
+            <td>大虾</td>
+            <td>¥10.85</td>
+            <td>小葱</td>
+            <td>¥0.00</td>
+        </tr>
     </table>
+
+    <script>
+        const table = document.getElementById('shoppingTable');
+        const rows = table.rows;
+        let monthlyTotals = {};
+
+        // 遍历表格行，累加金额
+        for (let i = 0; i < rows.length; i++) {
+            const date = rows[i].cells[0].textContent;
+            const amount = parseFloat(rows[i].cells[1].textContent.replace('¥', ''));
+            const month = date.substring(0, 7); // 获取日期的月份部分
+
+            if (!monthlyTotals[month]) {
+                monthlyTotals[month] = 0;
+            }
+            monthlyTotals[month] += amount;
+        }
+
+        // 为每个月添加一行显示总和
+        let currentMonth = '';
+        let monthlyTotalIndex = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+            const date = rows[i].cells[0].textContent;
+            const month = date.substring(0, 7); // 获取日期的月份部分
+
+            if (month !== currentMonth) {
+                if (currentMonth) {
+                    // 如果是新的月份，添加总和行
+                    const totalRow = table.insertRow(i);
+                    totalRow.insertCell(0).textContent = currentMonth + '月总计';
+                    totalRow.insertCell(1).textContent = '¥' + monthlyTotals[currentMonth].toFixed(2);
+                    monthlyTotalIndex = i;
+                }
+                currentMonth = month;
+            }
+        }
+
+        // 添加最后一个月的总和
+        if (monthlyTotalIndex < rows.length - 1) {
+            const totalRow = table.insertRow(rows.length);
+            totalRow.insertCell(0).textContent = '总计';
+            totalRow.insertCell(1).textContent = '¥' + monthlyTotals[currentMonth].toFixed(2);
+        }
+    </script>
 
 </body>
 
