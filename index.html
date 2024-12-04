@@ -17,6 +17,7 @@
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            box-sizing: border-box;
         }
 
         th {
@@ -75,10 +76,15 @@
             cursor: pointer;
         }
 
-        @media (max-width: 600px) {
-            .modal-content {
-                margin: 10% auto;
-            }
+        .total-row {
+            font-weight: normal;
+            color: rgb(116, 168, 68);
+            background-color: #f0f0f0;
+        }
+
+        .month-header {
+            font-weight: bold;
+            background-color: #e0e0e0;
         }
     </style>
 </head>
@@ -87,9 +93,18 @@
 
     <h2>消费记录表</h2>
 
-    <div id="expenseRecords">
-        <!-- 动态生成的月份模块 -->
-    </div>
+    <table id="expenseTable">
+        <thead>
+            <tr>
+                <th>日期</th>
+                <th>金额</th>
+                <th>来源</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 动态生成的月份模块 -->
+        </tbody>
+    </table>
 
     <div id="myModal" class="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-content" id="modalLabel">
@@ -112,34 +127,35 @@
         document.addEventListener('DOMContentLoaded', function () {
             const data = [
                 { date: "2024-01-21", amount: 29.24, details: ["手擀面：¥2.51", "鸡胸肉：¥3.74", "杏鲍菇：¥2.54", "鸡翅中：¥11.91", "大葱：¥1.97", "五香干：¥2.33", "大蒜：¥4.24"] },
-                { date: "2024-01-24", amount: 49.10, details: ["宽面：¥3.13", "老干妈：¥11.97", "白象：¥11.97", "挂面：¥7.15", "鸡蛋：¥14.88", "小葱：¥0.00"] },
-                { date: "2024-01-28", amount: 75.83, details: ["皱皮椒：¥2.64", "撒尿丸：¥17.49", "大白菜：¥2.64", "大葱：¥2.46", "土豆：¥3.25"] },
+                { date: "2024-01-24", amount: 49.10, details: ["宽面：¥3.13", "老干妈：¥11.97", "白象方便面：¥11.97", "挂面：¥7.15", "鸡蛋：¥14.88", "小葱：¥0.00"] },
+                { date: "2024-01-28", amount: 75.83, details: ["皱皮辣椒：¥2.64", "撒尿牛丸：¥17.49", "大白菜：¥2.64", "大葱：¥2.46", "土豆：¥3.25"] },
                 { date: "2024-02-04", amount: 55.80, details: ["呷哺蘸料：¥3.70", "土鸡蛋：¥0.00", "叮咚牛肉酱：¥3.20", "海底捞蘸料：¥3.70", "冷冻肥牛卷：¥27.15"] },
-                { date: "2024-02-06", amount: 39.49, details: ["西兰花：¥5.19", "番茄：¥6.29", "土鸡蛋：¥0.00", "香糟凤爪：¥11.94", "虎皮凤爪：¥11.88", "螺丝椒：¥4.19"] }
+                { date: "2024-02-06", amount: 39.49, details: ["西兰花：¥5.19", "番茄：¥6.29", "土鸡蛋：¥0.00", "香糟凤爪：¥11.94", "虎皮凤爪：¥11.88", "螺丝椒：¥4.19"] },
+                { date: "2024-02-09", amount: 148.85, details: ["【水磨糯米粉】叮咚定制芝麻包馅小圆子250g(2份)：¥11.61", "三全牛肉大葱水饺450g：¥7.66", "三全大黄米黑芝麻汤圆（宁波风味）400g/袋：¥6.67", "旺仔复原乳牛奶125mL*4盒/组：¥9.89", "娃哈哈AD钙奶220g*4瓶：¥8.50", "思念手打天下姬松茸素三鲜水饺600g/袋：¥14.33", "【新西兰小公牛】天萃庭冷鲜牛腩400g：¥27.13", "皱皮青椒约300g：¥2.71", "【当季现挖】新土豆约1kg：¥4.16", "优质番茄约500g：¥5.61", "海南皱皮蜜宝红心火龙果2个 800g：¥13.52", "【湖南特产】有豆志手工攸县香干248g/份：¥4.80", "【非转基因大豆】有豆志中百页150g/份：¥4.99", "去根松花菜半颗约500g：¥3.53", "正大优选鸭腿500g：¥9.89", "深海大虾200g/袋：¥10.85", "一点小葱20g：¥0.00"] }
+
             ];
 
-            const container = document.getElementById('expenseRecords');
+            const tableBody = document.getElementById('expenseTable').getElementsByTagName('tbody')[0];
             let currentMonth = '';
+            let monthTotal = 0;
 
-            data.forEach(item => {
+            data.forEach((item, index) => {
                 const month = item.date.substring(0, 7);
                 if (month !== currentMonth) {
                     currentMonth = month;
-                    container.innerHTML += `<table id="monthTable-${month}"><tr><th colspan="3">${month}</th></tr></table>`;
+                    monthTotal = 0; // Reset total for new month
                 }
-                const table = document.getElementById(`monthTable-${month}`);
-                const row = table.insertRow();
-                row.innerHTML = `<td>${item.date}</td><td class="clickable" data-details='${JSON.stringify(item.details)}'><a href="#">¥${item.amount}</a></td><td>叮咚</td>`;
-            });
+                monthTotal += parseFloat(item.amount); // Add current item's amount to the month total
 
-            // 添加每个月的总和行
-            container.querySelectorAll('table').forEach(table => {
-                const total = Array.from(table.rows).slice(1).reduce((sum, row) => {
-                    const amount = parseFloat(row.cells[1].textContent.replace('¥', ''));
-                    return sum + amount;
-                }, 0).toFixed(2);
-                const totalRow = table.insertRow(-1);
-                totalRow.innerHTML = `<td colspan="3">月总和: ¥${total}</td>`;
+                const row = tableBody.insertRow();
+                row.innerHTML = `<td>${item.date}</td><td class="clickable" data-details='${JSON.stringify(item.details)}'><a href="#">¥${item.amount}</a></td><td>叮咚</td>`;
+
+                // Check if it's the last item of the month
+                if (index === data.length - 1 || data[index + 1].date.substring(0, 7) !== month) {
+                    const totalRow = tableBody.insertRow();
+                    totalRow.className = 'total-row';
+                    totalRow.innerHTML = `<td>${month}-all</td><td>¥${monthTotal.toFixed(2)}</td><td></td>`;
+                }
             });
 
             // 原有的点击事件和关闭弹出窗口的代码
